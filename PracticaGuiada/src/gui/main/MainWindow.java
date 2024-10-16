@@ -3,6 +3,8 @@ package gui.main;
 import java.awt.BorderLayout;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -10,13 +12,14 @@ import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
 public class MainWindow extends JFrame{
 	
 	public MainWindow() {
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setTitle("JJ.OO. París 2024");
 		setSize(640, 480);
 		setLocationRelativeTo(null);
@@ -62,9 +65,23 @@ public class MainWindow extends JFrame{
 		
 		JMenuItem menuSalir = new JMenuItem("Salir");
 		menuSalir.setMnemonic(KeyEvent.VK_S);
+		menuSalir.addActionListener(e -> {
+			int respuesta = JOptionPane.showConfirmDialog(null, "¿Seguro que desea salir?", "Salir", JOptionPane.YES_NO_OPTION);
+			if(respuesta == 0) {
+				System.exit(0);
+			}
+		});
 		menu.add(menuSalir);
 		
-		
+		this.addWindowListener(new WindowAdapter() {
+			@Override 
+			public void windowClosing(WindowEvent e) {
+				int respuesta = JOptionPane.showConfirmDialog(null, "¿Seguro que desea salir?", "Salir", JOptionPane.YES_NO_OPTION);
+				if(respuesta == 0) {
+					System.exit(0);
+				}
+			}
+		});
 		
 		setVisible(true);
 	}
