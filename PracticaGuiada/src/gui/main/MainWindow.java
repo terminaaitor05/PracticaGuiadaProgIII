@@ -1,12 +1,13 @@
 package gui.main;
 
 import java.awt.BorderLayout;
-import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JMenu;
@@ -16,6 +17,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
+import domain.Athlete;
+import domain.Athlete.Genre;
+
 public class MainWindow extends JFrame{
 	
 	public MainWindow() {
@@ -24,13 +28,20 @@ public class MainWindow extends JFrame{
 		setSize(640, 480);
 		setLocationRelativeTo(null);
 		
-		ArrayList<String> nombres = new ArrayList<String>();
-		for (int i = 0; i < 40; i++) {
-			nombres.add("Atleta " + i);
+		List<Athlete> atletas = List.of(
+			new Athlete(1, "Fernando", Genre.MALE, "España", LocalDate.of(1981, 7, 29)),
+			new Athlete(2, "Josefina", Genre.FEMALE, "Reino Unido", LocalDate.of(1986, 2, 12)),
+			new Athlete(3, "Ronldinha", Genre.FEMALE, "Brasil", LocalDate.of(2000, 10, 17)),
+			new Athlete(4, "Asier", Genre.MALE, "España", LocalDate.of(2005, 8, 23)),
+			new Athlete(5, "Ronnie", Genre.MALE, "Estados Unidos", LocalDate.of(1999, 5, 20))
+		);
+		
+		DefaultListModel<Athlete> modelo = new DefaultListModel<Athlete>();
+		for(Athlete atleta : atletas) {
+			modelo.addElement(atleta);
 		}
 		
-		
-		JList<String> lista = new JList<String>(nombres.toArray(new String[nombres.size()]));
+		JList<Athlete> lista = new JList<Athlete>(modelo);
 		lista.setFixedCellWidth(200);
 		JScrollPane scroll = new JScrollPane(lista);
 		this.add(scroll, BorderLayout.WEST);
