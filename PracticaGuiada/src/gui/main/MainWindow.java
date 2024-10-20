@@ -22,6 +22,11 @@ import domain.Athlete.Genre;
 
 public class MainWindow extends JFrame{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public MainWindow() {
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setTitle("JJ.OO. París 2024");
@@ -29,11 +34,11 @@ public class MainWindow extends JFrame{
 		setLocationRelativeTo(null);
 		
 		List<Athlete> atletas = List.of(
-			new Athlete(1, "Fernando", Genre.MALE, "España", LocalDate.of(1981, 7, 29)),
-			new Athlete(2, "Josefina", Genre.FEMALE, "Reino Unido", LocalDate.of(1986, 2, 12)),
-			new Athlete(3, "Ronldinha", Genre.FEMALE, "Brasil", LocalDate.of(2000, 10, 17)),
-			new Athlete(4, "Asier", Genre.MALE, "España", LocalDate.of(2005, 8, 23)),
-			new Athlete(5, "Ronnie", Genre.MALE, "Estados Unidos", LocalDate.of(1999, 5, 20))
+			new Athlete(1, "Alonso, Fernando", Genre.MALE, "España", LocalDate.of(1981, 7, 29)),
+			new Athlete(2, "Pepppa, Josefina", Genre.FEMALE, "Reino Unido", LocalDate.of(1986, 2, 12)),
+			new Athlete(3, "Gaucho, Ronldinha", Genre.FEMALE, "Brasil", LocalDate.of(2000, 10, 17)),
+			new Athlete(4, "Garcia, Asier", Genre.MALE, "España", LocalDate.of(2005, 8, 23)),
+			new Athlete(5, "Coleman, Ronnie", Genre.MALE, "Estados Unidos", LocalDate.of(1999, 5, 20))
 		);
 		
 		DefaultListModel<Athlete> modelo = new DefaultListModel<Athlete>();
@@ -43,6 +48,7 @@ public class MainWindow extends JFrame{
 		
 		JList<Athlete> lista = new JList<Athlete>(modelo);
 		lista.setFixedCellWidth(200);
+		lista.setCellRenderer(new AthleteListCellRenderer());
 		JScrollPane scroll = new JScrollPane(lista);
 		this.add(scroll, BorderLayout.WEST);
 		
